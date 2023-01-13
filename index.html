@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="cardd">
+  <div class="bottom login">
+    <!-- <input class="form-control pas_inp" placeholder="Inter Password" type="password">  -->
+    <div class="input-group mb-3">
+      <input type="password" class="form-control pas_inp" placeholder="Inter Password" aria-describedby="basic-addon1" >
+      <span onclick="ShowPass()" class="input-group-text" id="basic-addon1"><i class="bi bi-eye-slash hide"></i><i class="bi bi-eye d-none show"></i></span>
+    </div>
+    <p class="err_text text-danger d-none">Incorrect password</p>
+    <p class="cor_text text-success d-none">correct password</p>
+    <button onclick="CheckPass()" class="btn btn-secondary text-center">Enter</button>
+  </div>
+</div>
+
+  <div id="bottom">
+    Created by <span style="margin-bottom: 2px; color: white;" class="top">Soff<span class="hub">Hub</span></span>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="./Login.js"></script>
+</body>
+</html>

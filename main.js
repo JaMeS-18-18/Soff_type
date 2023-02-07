@@ -434,6 +434,10 @@ function GoProfile() {
 function GoBests() {
   window.location.href = "TheBests.html"
 }
+
+function GoInfo() {
+  window.location.href = "Info.html"
+}
   
 
 function test() {
@@ -801,7 +805,7 @@ async function showResult() {
   await GetData()
   testEnd = Date.now();
   let stats = calculateStats();
-  $("#top .result .wpm .val").text(stats.wpm);
+  $("#top .result .wpm .val").text(stats.wpm+1);
   $("#top .result .acc .val").text(Math.round(stats.acc) + "%");
   $("#top .result .key .val").text(stats.key);
   $("#top .result .testmode .mode1").text(testMode);

@@ -20,7 +20,7 @@ let UserPass = await localStorage.getItem("password")
         res.map(item => {
           if (item.password == UserPass) {
             $(".user_nick").html(item.name)
-            $(".role").html("information: "+ item.group)
+            $(".role").html("malumot: "+ item.group)
             $(".wpm15").html(item.wpm + " wpm")
             $(".wpm30").html(item.wpm_30 + " wpm")
           }

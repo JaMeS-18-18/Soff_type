@@ -585,6 +585,7 @@ function initWords() {
 }
 
 function addWord() {
+  
   let randomWord = words[Math.floor(Math.random() * words.length)];
   wordsList.push(randomWord);
   let w = "<div class='word'>";
@@ -596,6 +597,7 @@ function addWord() {
 }
 
 function showWords() {
+
   $("#words").empty();
   if (testMode == "words" || testMode == "custom") {
     for (let i = 0; i < wordsList.length; i++) {
@@ -607,7 +609,7 @@ function showWords() {
       $("#words").append(w);
     }
   } else if (testMode == "time") {
-    $("#words").css("height", "78px").css("overflow", "hidden");
+    $("#words").css("height", "auto").css("overflow", "hidden").css("padding-top", "1rem");
     for (let i = 0; i < wordsList.length; i++) {
       let w = "<div class='word'>";
       for (let c = 0; c < wordsList[i].length; c++) {
@@ -622,6 +624,7 @@ function showWords() {
 }
 
 function updateActiveElement() {
+
   $("#words .word").removeClass("active");
   $($("#words .word")[currentWordIndex])
     .addClass("active")
@@ -655,6 +658,7 @@ function hideMissedLetters() {
     }
   }
 }
+
 
 function hideCaret() {
   $("#caret").addClass("hidden");
@@ -985,7 +989,7 @@ function restartTest() {
   if (testMode == "words" || testMode == "custom") {
     $("#words")
       .stop(true, true)
-      .css("height", oldHeight)
+      .css("height", "150px")
       .animate({ height: newHeight }, 250, () => {
         $("#words")
           .css("height", "fit-content")
@@ -996,7 +1000,7 @@ function restartTest() {
     $("#words")
       .stop(true, true)
       .css("height", oldHeight)
-      .animate({ height: 78 }, 250, () => {
+      .animate({ height: 125 }, 250, () => {
         updateCaretPosition();
       });
   }
@@ -1162,6 +1166,7 @@ $("#wordsInput").on("focusout", (event) => {
 
 $(document).keypress(function (event) {
   if (!$("#wordsInput").is(":focus")) return;
+
   if (event["keyCode"] == 13) return;
   if (event["keyCode"] == 32) return;
   if (currentInput == "" && inputHistory.length == 0) {
@@ -1196,6 +1201,10 @@ $(document).keypress(function (event) {
   compareInput();
   updateCaretPosition();
 });
+
+
+
+
 
 $(window).resize(() => {
   updateCaretPosition();

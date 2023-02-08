@@ -35,7 +35,8 @@ a:hover {
 
 .bottom {
   font-family: cursive;
-  color: rgba(38, 177, 80, 0.63);
+  /* color: rgba(38, 177, 80, 0.63); */
+  color: rgba(4, 248, 78, 0.63);
 }
 
 .User_Card {
@@ -213,7 +214,7 @@ a:hover {
   width: 0vw;
   /*   height: 0.5rem; */
   height: 0.5rem;
-  background: var(--sub-color);
+  background: rgba(4, 248, 78, 0.63);
   /*   background: #0f0f0f; */
   /*   background: red; */
   transition: 1s linear;
@@ -284,7 +285,7 @@ a:hover {
 }
 #menu {
   font-size: 1rem;
-  line-height: 1rem;
+  line-height: 2rem;
   color: var(--sub-color);
   display: grid;
   grid-auto-flow: column;
@@ -309,8 +310,9 @@ a:hover {
   align-items: center;
   justify-items: center;
   text-align: center;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 2.5rem;
+  height: 1.50rem;
+  font-size: 25px;
 }
 
 #menu .button:hover {
@@ -377,6 +379,7 @@ a:hover {
   width: -moz-min-content;
   width: min-content;
   transition: 0.25s;
+  display: flex;
   /*   margin-bottom: 0.1rem; */
   grid-column: 3/4;
   grid-row: 1/2;
@@ -391,16 +394,17 @@ a:hover {
 }
 
 #top .config .group .buttons {
-  font-size: 0.7rem;
-  line-height: 0.7rem;
-  display: flex;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  display: flex !important;
+  /* width: 70px; */
 }
 
 #top .config .group .buttons .button {
   transition: 0.25s;
   color: var(--sub-color);
   cursor: pointer;
-  margin-right: 0.25rem;
+  margin-right: 1rem;
 }
 
 #top .config .group .buttons .button:last-child {
@@ -514,6 +518,14 @@ key {
   align-items: center;
 }
 
+.container {
+  padding-top: 150px !important;
+}
+
+/* .logos { */
+  /* margin-bottom: 8rem !important; */
+/* } */
+
 #result .groups {
   display: grid;
   grid-auto-flow: column;
@@ -596,8 +608,8 @@ key {
 
 .word letter {
   /*   transition: 0.1s; */
-  height: 1rem;
-  font-size: 1em;
+  height: 1.5rem;
+  font-size: 1.5rem;
   line-height: 1rem;
   /* margin: 0 1px; */
 }

@@ -356,7 +356,7 @@ var words = [
   "if",
   "else",
   "break",
-  "",
+  "button",
   "ask",
   "late",
   "home",

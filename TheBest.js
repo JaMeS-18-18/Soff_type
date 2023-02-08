@@ -45,10 +45,6 @@ let index2 = 0
 
 function Render(date1, date2) {
 
-
-
-
-
   for (let i = 0; i < bestWPM.length; i++) {
    for(let k = 0; k < date1.length; k++){
       if (bestWPM[i] == Number(date1[k].wpm)) {

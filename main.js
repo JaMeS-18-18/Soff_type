@@ -45,7 +45,7 @@ var words2 = [
   "other",
   "so",
   "what",
-  "vaqt",
+  "time",
   "up",
   "go",
   "about",
@@ -407,11 +407,11 @@ let currentWordIndex = 0;
 let inputHistory = [];
 let currentInput = "";
 let wordsConfig = 25;
-let vaqtConfig = 15;
-let vaqt = vaqtConfig;
-let vaqtr = null;
+let timeConfig = 15;
+let time = timeConfig;
+let timer = null;
 let testActive = false;
-let testMode = "vaqt";
+let testMode = "time";
 let testStart, testEnd;
 let missedChars = 0;
 // let focus = false;
@@ -477,7 +477,7 @@ function initWords() {
   missedChars = 0;
   inputHistory = [];
   currentInput = "";
-  if (testMode == "vaqt") {
+  if (testMode == "time") {
     let randomWord = words[Math.floor(Math.random() * words.length)];
     if (punctuationMode) {
       wordsList.push(capitalizeFirstLetter(randomWord));
@@ -608,7 +608,7 @@ function showWords() {
       w += "</div>";
       $("#words").append(w);
     }
-  } else if (testMode == "vaqt") {
+  } else if (testMode == "time") {
     $("#words").css("height", "auto").css("overflow", "hidden").css("padding-top", "1rem");
     for (let i = 0; i < wordsList.length; i++) {
       let w = "<div class='word'>";
@@ -678,12 +678,12 @@ function startCaretAnimation() {
   $("#caret").css("animation-name", "caretFlash");
 }
 
-function showvaqtr() {
-  $("#vaqtrWrapper").css("opacity", 1);
+function showtimer() {
+  $("#timerWrapper").css("opacity", 1);
 }
 
-function hidevaqtr() {
-  $("#vaqtrWrapper").css("opacity", 0);
+function hidetimer() {
+  $("#timerWrapper").css("opacity", 0);
 }
 
 function updateCaretPosition() {
@@ -745,8 +745,8 @@ function calculateStats() {
   avgWordLen = 5;
   let testSeconds = (testEnd - testStart) / 1000;
   let wpm = 0;
-  if (testMode == "vaqt") {
-    wpm = (correctChars * (60 / vaqtConfig)) / avgWordLen;
+  if (testMode == "time") {
+    wpm = (correctChars * (60 / timeConfig)) / avgWordLen;
   } else if (testMode == "words" || testMode == "custom") {
     wpm = (correctChars * (60 / testSeconds)) / avgWordLen;
   }
@@ -810,8 +810,8 @@ async function showResult() {
   $("#top .result .acc .val").text(Math.round(stats.acc) + "%");
   $("#top .result .key .val").text(stats.key);
   $("#top .result .testmode .mode1").text(testMode);
-  if (testMode == "vaqt") {
-    $("#top .result .testmode .mode2").text(vaqtConfig);
+  if (testMode == "time") {
+    $("#top .result .testmode .mode2").text(timeConfig);
   } else if (testMode == "words") {
     $("#top .result .testmode .mode2").text(wordsConfig);
   }
@@ -831,7 +831,7 @@ async function showResult() {
 
   AllUsers.map(user => {
     if (String(user.password) == String(UserPass)) {
-      if (vaqtConfig == 15 && Number(user.wpm) < Number(stats.wpm)) {
+      if (timeConfig == 15 && Number(user.wpm) < Number(stats.wpm)) {
       $.ajax(`https://63b9659a4482143a3f1024cb.mockapi.io/Apilar/${user.id}`,{
             type: "PUT",
             data: {
@@ -845,7 +845,7 @@ async function showResult() {
             )
     }
 
-    if (vaqtConfig == 30 && Number(user.wpm_30) < Number(stats.wpm)) {
+    if (timeConfig == 30 && Number(user.wpm_30) < Number(stats.wpm)) {
       $.ajax(`https://63b9659a4482143a3f1024cb.mockapi.io/Apilar/${user.id}`,{
         type: "PUT",
         data: {
@@ -862,7 +862,7 @@ async function showResult() {
 
   })
 
-  // if (Number(AllUsers[UserID].wpm) < Number(stats.wpm) && vaqtConfig == 15) {
+  // if (Number(AllUsers[UserID].wpm) < Number(stats.wpm) && timeConfig == 15) {
   //   $.ajax(`https://63b9659a4482143a3f1024cb.mockapi.io/Apilar/${AllUsers[UserID].id}`,{
   //     type: "PUT",
   //     data: {
@@ -882,9 +882,9 @@ async function showResult() {
   //     )
   
   // } 
-  // console.log("ishladi", vaqtConfig, Number(AllUsers[UserID].wpm_30 , stats.wpm));
+  // console.log("ishladi", timeConfig, Number(AllUsers[UserID].wpm_30 , stats.wpm));
   
-  // if (Number(AllUsers[UserID].wpm_30) < Number(stats.wpm) && vaqtConfig == 30) {
+  // if (Number(AllUsers[UserID].wpm_30) < Number(stats.wpm) && timeConfig == 30) {
   //   $.ajax(`https://63b9659a4482143a3f1024cb.mockapi.io/Apilar/${AllUsers[UserID].id}`,{
   //     type: "PUT",
   //     data: {
@@ -934,10 +934,10 @@ async function showResult() {
   // );
 }
 
-function updatevaqtr() {
+function updatetimer() {
   liveWPM();
-  let percent = ((vaqt - 1) / vaqtConfig) * 100;
-  $("#vaqtr")
+  let percent = ((time - 1) / timeConfig) * 100;
+  $("#timer")
     .stop(true, true)
     .css("width", 100 - percent + "vw");
 }
@@ -968,19 +968,19 @@ function restartTest() {
   initWords();
   testActive = false;
   startCaretAnimation();
-  if (testMode == "vaqt") {
-    hidevaqtr();
+  if (testMode == "time") {
+    hidetimer();
     setTimeout(function () {
-      $("#vaqtr")
+      $("#timer")
         .css("transition", "none")
         .css("width", "0vw")
         .animate({ top: 0 }, 0, () => {
-          $("#vaqtr").css("transition", "1s linear");
+          $("#timer").css("transition", "1s linear");
         });
     }, 250);
-    clearInterval(vaqtr);
-    vaqtr = null;
-    vaqt = vaqtConfig;
+    clearInterval(timer);
+    timer = null;
+    time = timeConfig;
   }
   let newHeight = $("#words")
     .css("height", "fit-content")
@@ -996,7 +996,7 @@ function restartTest() {
           .css("height", "-moz-fit-content");
         updateCaretPosition();
       });
-  } else if (testMode == "vaqt") {
+  } else if (testMode == "time") {
     $("#words")
       .stop(true, true)
       .css("height", oldHeight)
@@ -1011,7 +1011,7 @@ function changeCustomText() {
   initWords();
 }
 
-function vaqtsUp() {
+function timesUp() {
   hideCaret();
   testActive = false;
   showResult();
@@ -1077,16 +1077,16 @@ function changeWordCount(wordCount) {
   restartTest();
 }
 
-$(document).on("click", "#top .config .vaqt .button", (e) => {
-  vaqt = e.currentTarget.innerHTML;
-  changevaqtConfig(vaqt);
+$(document).on("click", "#top .config .time .button", (e) => {
+  time = e.currentTarget.innerHTML;
+  changetimeConfig(time);
 });
 
-function changevaqtConfig(vaqt) {
-  changeMode("vaqt");
-  vaqtConfig = vaqt;
-  $("#top .config .vaqt .button").removeClass("active");
-  $("#top .config .vaqt .button[vaqtConfig='" + vaqt + "']").addClass("active");
+function changetimeConfig(time) {
+  changeMode("time");
+  timeConfig = time;
+  $("#top .config .time .button").removeClass("active");
+  $("#top .config .time .button[timeConfig='" + time + "']").addClass("active");
   restartTest();
 }
 
@@ -1118,19 +1118,19 @@ function changeMode(mode) {
   testMode = mode;
   $("#top .config .mode .button").removeClass("active");
   $("#top .config .mode .button[mode='" + mode + "']").addClass("active");
-  if (testMode == "vaqt") {
+  if (testMode == "time") {
     $("#top .config .wordCount").addClass("hidden");
-    $("#top .config .vaqt").removeClass("hidden");
+    $("#top .config .time").removeClass("hidden");
     $("#top .config .customText").addClass("hidden");
     $("#top .config .punctuationMode").removeClass("hidden");
   } else if (testMode == "words") {
     $("#top .config .wordCount").removeClass("hidden");
-    $("#top .config .vaqt").addClass("hidden");
+    $("#top .config .time").addClass("hidden");
     $("#top .config .customText").addClass("hidden");
     $("#top .config .punctuationMode").removeClass("hidden");
   } else if (testMode == "custom") {
     $("#top .config .wordCount").addClass("hidden");
-    $("#top .config .vaqt").addClass("hidden");
+    $("#top .config .time").addClass("hidden");
     $("#top .config .customText").removeClass("hidden");
     $("#top .config .punctuationMode").addClass("hidden");
   }
@@ -1173,15 +1173,15 @@ $(document).keypress(function (event) {
     testActive = true;
     stopCaretAnimation();
     testStart = Date.now();
-    if (testMode == "vaqt") {
-      showvaqtr();
-      updatevaqtr();
-      vaqtr = setInterval(function () {
-        vaqt--;
-        updatevaqtr();
-        if (vaqt == 0) {
-          clearInterval(vaqtr);
-          vaqtsUp();
+    if (testMode == "time") {
+      showtimer();
+      updatetimer();
+      timer = setInterval(function () {
+        time--;
+        updatetimer();
+        if (time == 0) {
+          clearInterval(timer);
+          timesUp();
         }
       }, 1000);
     }
@@ -1267,7 +1267,7 @@ $(document).keydown((event) => {
       event.preventDefault();
       if (currentInput == "") return;
       let currentWord = wordsList[currentWordIndex];
-      if (testMode == "vaqt") {
+      if (testMode == "time") {
         let currentTop = $($("#words .word")[currentWordIndex]).position().top;
         let nextTop = $($("#words .word")[currentWordIndex + 1]).position().top;
         if (nextTop > currentTop) {
@@ -1298,7 +1298,7 @@ $(document).keydown((event) => {
         updateActiveElement();
         updateCaretPosition();
       }
-      if (testMode == "vaqt") {
+      if (testMode == "time") {
         addWord();
       }
     }
@@ -1323,11 +1323,11 @@ let commands = {
       }
     },
     {
-      id: "changevaqtConfig",
-      display: "Change vaqt config...",
+      id: "changetimeConfig",
+      display: "Change time config...",
       subgroup: true,
       exec: () => {
-        currentCommands = commandsvaqtConfig;
+        currentCommands = commandstimeConfig;
         showCommandLine();
       }
     },
@@ -1377,9 +1377,9 @@ let commandsMode = {
   title: "Change mode...",
   list: [
     {
-      id: "changeModevaqt",
-      display: "vaqt",
-      exec: () => changeMode("vaqt")
+      id: "changeModetime",
+      display: "time",
+      exec: () => changeMode("time")
     },
     {
       id: "changeModeWords",
@@ -1393,28 +1393,28 @@ let commandsMode = {
     }
   ]
 };
-let commandsvaqtConfig = {
-  title: "Change vaqt config...",
+let commandstimeConfig = {
+  title: "Change time config...",
   list: [
     {
-      id: "changevaqtConfig15",
+      id: "changetimeConfig15",
       display: "15",
-      exec: () => changevaqtConfig("15")
+      exec: () => changetimeConfig("15")
     },
     {
-      id: "changevaqtConfig30",
+      id: "changetimeConfig30",
       display: "30",
-      exec: () => changevaqtConfig("30")
+      exec: () => changetimeConfig("30")
     },
     {
-      id: "changevaqtConfig60",
+      id: "changetimeConfig60",
       display: "60",
-      exec: () => changevaqtConfig("60")
+      exec: () => changetimeConfig("60")
     },
     {
-      id: "changevaqtConfig120",
+      id: "changetimeConfig120",
       display: "120",
-      exec: () => changevaqtConfig("120")
+      exec: () => changetimeConfig("120")
     }
   ]
 };

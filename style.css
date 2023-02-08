@@ -451,8 +451,8 @@ a:hover {
 }
 
 #top .result .group .title {
-  font-size: 0.65rem;
-  line-height: 0.65rem;
+  font-size: 1rem;
+  line-height: 1rem;
   color: var(--sub-color);
 }
 

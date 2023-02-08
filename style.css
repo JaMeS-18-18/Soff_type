@@ -194,10 +194,10 @@ a:hover {
 }
 #resultScreenshot .stats .group .top {
   color: var(--sub-color);
-  line-height: 1rem;
+  line-height: 1.5rem;
 }
 #resultScreenshot .stats .group .bottom {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1.5rem;
 }
 
@@ -429,8 +429,8 @@ a:hover {
 
 #top .config .group .title {
   color: var(--sub-color);
-  font-size: 0.5rem;
-  line-height: 0.5rem;
+  font-size: 1rem;
+  line-height: 1rem;
   margin-bottom: 0.15rem;
 }
 

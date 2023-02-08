@@ -127,3 +127,7 @@ console.log(bestWPM_30);
      $(".Bests_30").append(card)
    })
 }
+
+function GoInfo() {
+  window.location.href = "Info.html"
+}

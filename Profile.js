@@ -49,3 +49,7 @@ function LogOut() {
   localStorage.removeItem("userID")
   window.location.href = "index.html"
 }
+
+function GoInfo() {
+  window.location.href = "Info.html"
+}

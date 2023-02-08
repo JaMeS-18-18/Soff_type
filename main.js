@@ -738,7 +738,6 @@ function calculateStats() {
   totalChars--;
   correctChars--;
   avgWordLen = totalChars / inputHistory.length;
-  // console.log(avgWordLen);
   avgWordLen = 5;
   let testSeconds = (testEnd - testStart) / 1000;
   let wpm = 0;
@@ -789,10 +788,8 @@ async function GetData() {
     type: "GET",
     success: (res) => {
       AllUsers = res
-      console.log(res);
     },
     error: (err) => {
-      console.log(err, "Err keldi");
     }
   })  
 }
@@ -815,7 +812,7 @@ async function showResult() {
     $("#top .result .testmode .mode2").text(wordsConfig);
   }
   if (punctuationMode) {
-    $("#top .result .testmode .mode3").text("punc.");
+    $("#top .result .testmode .mode3").text(" ");
   } else {
     $("#top .result .testmode .mode3").text("");
   }
@@ -831,7 +828,6 @@ async function showResult() {
   AllUsers.map(user => {
     if (String(user.password) == String(UserPass)) {
       if (timeConfig == 15 && Number(user.wpm) < Number(stats.wpm)) {
-        console.log(user.wpm, stats.wpm);
       $.ajax(`https://63b9659a4482143a3f1024cb.mockapi.io/Apilar/${user.id}`,{
             type: "PUT",
             data: {
@@ -841,7 +837,6 @@ async function showResult() {
               localStorage.setItem("ThisUser", JSON.stringify(user))
             },
             error: (err) => {
-              console.log(err, "Err keldi");
             }}
             )
     }
@@ -856,7 +851,6 @@ async function showResult() {
           localStorage.setItem("ThisUser", JSON.stringify(user))
         },
         error: (err) => {
-          console.log(err, "Err keldi");
         }}
         )
     }
@@ -1559,6 +1553,6 @@ function displayFoundCommands() {
 }
 else{
   $(".err_tex").removeClass("d-none")
-  window.location.href = "Index.html"
+  window.location.href = "index.html"
 }
 

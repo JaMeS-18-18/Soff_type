@@ -809,7 +809,7 @@ async function showResult() {
   $("#top .result .wpm .val").text(stats.wpm+1);
   $("#top .result .acc .val").text(Math.round(stats.acc) + "%");
   $("#top .result .key .val").text(stats.key);
-  $("#top .result .testmode .mode1").text(testMode);
+  $("#top .result .testmode .mode1").text('vaqt');
   if (testMode == "time") {
     $("#top .result .testmode .mode2").text(timeConfig);
   } else if (testMode == "words") {

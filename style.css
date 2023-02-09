@@ -15,6 +15,15 @@
   --sub2-color: #444;
   --bg-color: #fff;
 } */
+
+
+.info_card {
+  height: 500px;
+  font-family: cursive;
+}
+
+
+
 body {
   margin: 0;
   padding: 2rem;
